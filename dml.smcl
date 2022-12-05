@@ -1,0 +1,779 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/pranjal/Desktop/Causal-Inference/dml.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 4 Dec 2022, 16:33:06
+
+{com}. net from http://www.stata.com/data/jwooldridge/
+{txt}{.-}
+http://www.stata.com/data/jwooldridge/
+{hilite:Data associated with texts by Jeffrey M. Wooldridge}
+{.-}
+
+PACKAGES you could -{hilite:net describe}-:
+{p2colset 5 23 25 2}{...}
+{p2col :{net describe eacsap:eacsap}}{hi:Datasets used in Econometric Analysis of Cross Section}{p_end}
+{p2col :}{space 2}{hi:and Panel Data}{p_end}
+{p2colreset}{...}
+{.-}
+
+{com}. net get eacsap
+checking {hilite:eacsap} consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. use jtrain2
+
+. probit train re74 re75 age agesq nodegree married black hisp, nolog
+{res}
+{txt}Probit regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:445}
+{txt}{col 57}{lalign 13:LR chi2({res:8})}{col 70} = {res}{ralign 6:16.07}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0415}
+{txt}Log likelihood = {res:-294.06748}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.0266}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       train{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}re74 {c |}{col 14}{res}{space 2}-.0189577{col 26}{space 2} .0159392{col 37}{space 1}   -1.19{col 46}{space 3}0.234{col 54}{space 4}-.0501979{col 67}{space 3} .0122825
+{txt}{space 8}re75 {c |}{col 14}{res}{space 2} .0371871{col 26}{space 2} .0271086{col 37}{space 1}    1.37{col 46}{space 3}0.170{col 54}{space 4}-.0159447{col 67}{space 3}  .090319
+{txt}{space 9}age {c |}{col 14}{res}{space 2}-.0005467{col 26}{space 2} .0534045{col 37}{space 1}   -0.01{col 46}{space 3}0.992{col 54}{space 4}-.1052176{col 67}{space 3} .1041242
+{txt}{space 7}agesq {c |}{col 14}{res}{space 2} .0000719{col 26}{space 2} .0008734{col 37}{space 1}    0.08{col 46}{space 3}0.934{col 54}{space 4}-.0016399{col 67}{space 3} .0017837
+{txt}{space 4}nodegree {c |}{col 14}{res}{space 2}  -.44195{col 26}{space 2} .1515457{col 37}{space 1}   -2.92{col 46}{space 3}0.004{col 54}{space 4}-.7389742{col 67}{space 3}-.1449258
+{txt}{space 5}married {c |}{col 14}{res}{space 2}  .091519{col 26}{space 2} .1726192{col 37}{space 1}    0.53{col 46}{space 3}0.596{col 54}{space 4}-.2468083{col 67}{space 3} .4298464
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-.1446253{col 26}{space 2} .2271609{col 37}{space 1}   -0.64{col 46}{space 3}0.524{col 54}{space 4}-.5898524{col 67}{space 3} .3006019
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2}-.5004545{col 26}{space 2} .3079227{col 37}{space 1}   -1.63{col 46}{space 3}0.104{col 54}{space 4}-1.103972{col 67}{space 3} .1030629
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .2284561{col 26}{space 2} .8154273{col 37}{space 1}    0.28{col 46}{space 3}0.779{col 54}{space 4}-1.369752{col 67}{space 3} 1.826664
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. predict propensity, p
+
+. reg re78 train propensity
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(2, 442)       = {res}     5.00
+{txt}       Model {c |} {res} 432.165422         2  216.082711   {txt}Prob > F        ={res}    0.0071
+{txt}    Residual {c |} {res} 19093.4912       442  43.1979439   {txt}R-squared       ={res}    0.0221
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0177
+{txt}       Total {c |} {res} 19525.6566       444  43.9767041   {txt}Root MSE        =   {res} 6.5725
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.625741{col 26}{space 2} .6436153{col 37}{space 1}    2.53{col 46}{space 3}0.012{col 54}{space 4}  .360815{col 67}{space 3} 2.890668
+{txt}{space 2}propensity {c |}{col 14}{res}{space 2}  4.74316{col 26}{space 2} 3.398343{col 37}{space 1}    1.40{col 46}{space 3}0.163{col 54}{space 4}-1.935758{col 67}{space 3} 11.42208
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  2.65396{col 26}{space 2} 1.421591{col 37}{space 1}    1.87{col 46}{space 3}0.063{col 54}{space 4}-.1399573{col 67}{space 3} 5.447877
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg re78 train 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(1, 443)       = {res}     8.04
+{txt}       Model {c |} {res} 348.013451         1  348.013451   {txt}Prob > F        ={res}    0.0048
+{txt}    Residual {c |} {res} 19177.6432       443  43.2903909   {txt}R-squared       ={res}    0.0178
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0156
+{txt}       Total {c |} {res} 19525.6566       444  43.9767041   {txt}Root MSE        =   {res} 6.5795
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.794343{col 26}{space 2} .6328536{col 37}{space 1}    2.84{col 46}{space 3}0.005{col 54}{space 4} .5505748{col 67}{space 3} 3.038111
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 4.554802{col 26}{space 2}  .408046{col 37}{space 1}   11.16{col 46}{space 3}0.000{col 54}{space 4} 3.752856{col 67}{space 3} 5.356749
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg re78 train 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(1, 443)       = {res}     8.04
+{txt}       Model {c |} {res} 348.013451         1  348.013451   {txt}Prob > F        ={res}    0.0048
+{txt}    Residual {c |} {res} 19177.6432       443  43.2903909   {txt}R-squared       ={res}    0.0178
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0156
+{txt}       Total {c |} {res} 19525.6566       444  43.9767041   {txt}Root MSE        =   {res} 6.5795
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.794343{col 26}{space 2} .6328536{col 37}{space 1}    2.84{col 46}{space 3}0.005{col 54}{space 4} .5505748{col 67}{space 3} 3.038111
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 4.554802{col 26}{space 2}  .408046{col 37}{space 1}   11.16{col 46}{space 3}0.000{col 54}{space 4} 3.752856{col 67}{space 3} 5.356749
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. use jtrain2.dta
+{err}no; dataset in memory has changed since last saved
+{txt}{search r(4), local:r(4);}
+
+{com}. use jtrain2
+{err}no; dataset in memory has changed since last saved
+{txt}{search r(4), local:r(4);}
+
+{com}.  net get eacsap
+checking {hilite:eacsap} consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. use jtrain2
+{err}no; dataset in memory has changed since last saved
+{txt}{search r(4), local:r(4);}
+
+{com}. describe 
+
+{txt}Contains data from {res}jtrain2.dta
+{txt} Observations:{res}           445                  
+{txt}    Variables:{res}            20                  17 Jan 2000 17:20
+{txt}{hline}
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+{hline}
+{p 0 48}{res}{bind:train          }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if assigned to job training{p_end}
+{p 0 48}{bind:age            }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}age in 1977{p_end}
+{p 0 48}{bind:educ           }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}years of education{p_end}
+{p 0 48}{bind:black          }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if black{p_end}
+{p 0 48}{bind:hisp           }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if Hispanic{p_end}
+{p 0 48}{bind:married        }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if married{p_end}
+{p 0 48}{bind:nodegree       }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if no high school degree{p_end}
+{p 0 48}{bind:mosinex        }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}# mnths prior to 1/78 in expmnt{p_end}
+{p 0 48}{bind:re74           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}real earns., 1974, $1000s{p_end}
+{p 0 48}{bind:re75           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}real earns., 1975, $1000s{p_end}
+{p 0 48}{bind:re78           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}real earns., 1978, $1000s{p_end}
+{p 0 48}{bind:unem74         }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if unem. all of 1974{p_end}
+{p 0 48}{bind:unem75         }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if unem. all of 1975{p_end}
+{p 0 48}{bind:unem78         }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if unem. all of 1978{p_end}
+{p 0 48}{bind:lre74          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}log(re74); zero if re74 == 0{p_end}
+{p 0 48}{bind:lre75          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}log(re75); zero if re75 == 0{p_end}
+{p 0 48}{bind:lre78          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}log(re78); zero if re78 == 0{p_end}
+{p 0 48}{bind:agesq          }{txt}{bind: int     }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}age^2{p_end}
+{p 0 48}{bind:mostrn         }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}months in training{p_end}
+{p 0 48}{bind:propensity     }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Pr(train){p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+
+{com}. use jtrain2, clear
+
+. reg re78 train
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(1, 443)       = {res}     8.04
+{txt}       Model {c |} {res} 348.013451         1  348.013451   {txt}Prob > F        ={res}    0.0048
+{txt}    Residual {c |} {res} 19177.6432       443  43.2903909   {txt}R-squared       ={res}    0.0178
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0156
+{txt}       Total {c |} {res} 19525.6566       444  43.9767041   {txt}Root MSE        =   {res} 6.5795
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.794343{col 26}{space 2} .6328536{col 37}{space 1}    2.84{col 46}{space 3}0.005{col 54}{space 4} .5505748{col 67}{space 3} 3.038111
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 4.554802{col 26}{space 2}  .408046{col 37}{space 1}   11.16{col 46}{space 3}0.000{col 54}{space 4} 3.752856{col 67}{space 3} 5.356749
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. use jtrain3, clear
+{err}{p 0 4 2}
+file {bf:{err}jtrain3.dta}
+not found
+{p_end}
+{txt}{search r(601), local:r(601);}
+
+{com}.  use jtrain3
+{err}{p 0 4 2}
+file {bf:{err}jtrain3.dta}
+not found
+{p_end}
+{txt}{search r(601), local:r(601);}
+
+{com}. use jtrain3.dta
+{err}{p 0 4 2}
+file {bf:{err}jtrain3.dta}
+not found
+{p_end}
+{txt}{search r(601), local:r(601);}
+
+{com}. reg re78 train
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(1, 443)       = {res}     8.04
+{txt}       Model {c |} {res} 348.013451         1  348.013451   {txt}Prob > F        ={res}    0.0048
+{txt}    Residual {c |} {res} 19177.6432       443  43.2903909   {txt}R-squared       ={res}    0.0178
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0156
+{txt}       Total {c |} {res} 19525.6566       444  43.9767041   {txt}Root MSE        =   {res} 6.5795
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.794343{col 26}{space 2} .6328536{col 37}{space 1}    2.84{col 46}{space 3}0.005{col 54}{space 4} .5505748{col 67}{space 3} 3.038111
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 4.554802{col 26}{space 2}  .408046{col 37}{space 1}   11.16{col 46}{space 3}0.000{col 54}{space 4} 3.752856{col 67}{space 3} 5.356749
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg re78 train re74 re75 age agesq nodegree married black hisp
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(9, 435)       = {res}     2.49
+{txt}       Model {c |} {res} 955.909613         9  106.212179   {txt}Prob > F        ={res}    0.0088
+{txt}    Residual {c |} {res}  18569.747       435  42.6890736   {txt}R-squared       ={res}    0.0490
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0293
+{txt}       Total {c |} {res} 19525.6566       444  43.9767041   {txt}Root MSE        =   {res} 6.5337
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.625166{col 26}{space 2} .6399454{col 37}{space 1}    2.54{col 46}{space 3}0.011{col 54}{space 4} .3673964{col 67}{space 3} 2.882935
+{txt}{space 8}re74 {c |}{col 14}{res}{space 2} .0730643{col 26}{space 2} .0775264{col 37}{space 1}    0.94{col 46}{space 3}0.346{col 54}{space 4}-.0793087{col 67}{space 3} .2254373
+{txt}{space 8}re75 {c |}{col 14}{res}{space 2} .0651047{col 26}{space 2} .1357642{col 37}{space 1}    0.48{col 46}{space 3}0.632{col 54}{space 4}-.2017307{col 67}{space 3} .3319401
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2006381{col 26}{space 2}  .272712{col 37}{space 1}    0.74{col 46}{space 3}0.462{col 54}{space 4}-.3353589{col 67}{space 3} .7366352
+{txt}{space 7}agesq {c |}{col 14}{res}{space 2}-.0025326{col 26}{space 2} .0044565{col 37}{space 1}   -0.57{col 46}{space 3}0.570{col 54}{space 4}-.0112916{col 67}{space 3} .0062264
+{txt}{space 4}nodegree {c |}{col 14}{res}{space 2}-1.099426{col 26}{space 2} .7914955{col 37}{space 1}   -1.39{col 46}{space 3}0.166{col 54}{space 4}-2.655057{col 67}{space 3} .4562048
+{txt}{space 5}married {c |}{col 14}{res}{space 2}-.1052808{col 26}{space 2} .8930025{col 37}{space 1}   -0.12{col 46}{space 3}0.906{col 54}{space 4}-1.860417{col 67}{space 3} 1.649855
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-2.115677{col 26}{space 2} 1.172482{col 37}{space 1}   -1.80{col 46}{space 3}0.072{col 54}{space 4} -4.42011{col 67}{space 3} .1887571
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2}-.0095228{col 26}{space 2} 1.551503{col 37}{space 1}   -0.01{col 46}{space 3}0.995{col 54}{space 4}-3.058898{col 67}{space 3} 3.039852
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3.691303{col 26}{space 2} 4.180235{col 37}{space 1}    0.88{col 46}{space 3}0.378{col 54}{space 4}-4.524666{col 67}{space 3} 11.90727
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. cd Desktop
+{err}unable to change to Desktop
+{txt}{search r(170), local:r(170);}
+
+{com}. use "/Users/pranjal/Downloads/jtrain3.dta"
+
+. reg re78 train
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     2,675
+{txt}{hline 13}{c +}{hline 34}   F(1, 2673)      = {res}   173.41
+{txt}       Model {c |} {res} 39811.3898         1  39811.3898   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 613649.173     2,673  229.573204   {txt}R-squared       ={res}    0.0609
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0606
+{txt}       Total {c |} {res} 653460.563     2,674  244.375678   {txt}Root MSE        =   {res} 15.152
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2}-15.20478{col 26}{space 2} 1.154614{col 37}{space 1}  -13.17{col 46}{space 3}0.000{col 54}{space 4} -17.4688{col 67}{space 3}-12.94075
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 21.55392{col 26}{space 2} .3036414{col 37}{space 1}   70.98{col 46}{space 3}0.000{col 54}{space 4} 20.95853{col 67}{space 3} 22.14932
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. net install ddml, from(https://raw.githubusercontent.com/aahrens1/ddml/master)
+checking {hilite:ddml} consistency and verifying not already installed...
+installing into /Users/pranjal/Library/Application Support/Stata/ado/plus/...
+installation complete.
+
+. 
+. net install pystacked, ///
+{err}option {bf:/} not allowed
+{txt}{search r(198), local:r(198);}
+
+{com}. from(https://raw.githubusercontent.com/aahrens1/pystacked/main) replace
+{err}command {bf}from{sf} is unrecognized
+{txt}{search r(199), local:r(199);}
+
+{com}. net install pystacked, from(https://raw.githubusercontent.com/aahrens1/pystacked/main) replace
+checking {hilite:pystacked} consistency and verifying not already installed...
+installing into /Users/pranjal/Library/Application Support/Stata/ado/plus/...
+installation complete.
+
+. ddml
+{res}{err}model m0 not found
+{txt}{search r(3259), local:r(3259);}
+
+{com}.  insheet using https://statalasso.github.io/dta/housing.csv, comma
+{err}you must start with an empty dataset
+{txt}{search r(18), local:r(18);}
+
+{com}.  insheet using https://statalasso.github.io/dta/housing.csv, comma clear
+{txt}(14 vars, 506 obs)
+
+{com}. use https://statalasso.github.io/dta/AJR.dta, clear
+
+. global Y logpgp95
+
+. global X lat_abst edes1975 avelf temp* humid* steplow-oilres
+
+. global D avexpr
+
+. qddml $Y $D ($X), model(partial) cmdopt(method(rf gradboost))
+{res}{err}  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(500 lines skipped)
+  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(500 lines skipped)
+{com}(error occurred while loading pystacked.ado)
+{txt}{search r(7102), local:r(7102);}
+
+{com}.  qddml $Y $D ($X), model(partial) cmdopt(method(rf gradboost))
+{res}{err}  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(500 lines skipped)
+  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(500 lines skipped)
+{com}(error occurred while loading pystacked.ado)
+{txt}{search r(7102), local:r(7102);}
+
+{com}. net install pdslasso, from("https://raw.githubusercontent.com/statalasso/pdslasso/master/") 
+checking {hilite:pdslasso} consistency and verifying not already installed...
+installing into /Users/pranjal/Library/Application Support/Stata/ado/plus/...
+installation complete.
+
+. net install pdslasso, from("https://raw.githubusercontent.com/statalasso/pdslasso/master/") 
+checking {hilite:pdslasso} consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. 
+. qddml $Y $D ($X), model(partial) cmdopt(method(rf gradboost))
+{res}{err}  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(500 lines skipped)
+  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(500 lines skipped)
+{com}(error occurred while loading pystacked.ado)
+{txt}{search r(7102), local:r(7102);}
+
+{com}. help qddml 
+
+.    . use https://github.com/aahrens1/ddml/raw/master/data/sipp1991.dta, clear
+
+.         . global Y net_tfa
+
+.         . global D e401
+
+.         . global X tw age inc fsize educ db marr twoearn pira hown
+
+.         . set seed 42
+
+. 
+.  qddml $Y $D ($X), kfolds(2) model(partial) cmd(pystacked) cmdopt(type(reg) method(rf))
+{res}{err}  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(500 lines skipped)
+  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(500 lines skipped)
+{com}(error occurred while loading pystacked.ado)
+{txt}{search r(7102), local:r(7102);}
+
+{com}. 
+. 
+. net install ddml, from(https://raw.githubusercontent.com/aahrens1/ddml/master)
+checking {hilite:ddml} consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. net install pystacked, from(https://raw.githubusercontent.com/aahrens1/pystacked/vXXX) replace
+{err}{p 0 4 2}
+file {bf:{err}https://raw.githubusercontent.com/aahrens1/pystacked/vXXX/stata.toc}
+not found
+{p_end}
+{hilite:https://raw.githubusercontent.com/aahrens1/pystacked/vXXX/} either
+  1)  is not a valid URL, or
+  2)  could not be contacted, or
+  3)  is not a Stata download site (has no stata.toc file).
+
+current site is still https://raw.githubusercontent.com/aahrens1/ddml/master/
+{txt}{search r(601), local:r(601);}
+
+{com}. net install pystacked, from(https://raw.githubusercontent.com/aahrens1/pystacked/v047) replace
+{err}{p 0 4 2}
+file {bf:{err}https://raw.githubusercontent.com/aahrens1/pystacked/v047/stata.toc}
+not found
+{p_end}
+{hilite:https://raw.githubusercontent.com/aahrens1/pystacked/v047/} either
+  1)  is not a valid URL, or
+  2)  could not be contacted, or
+  3)  is not a Stata download site (has no stata.toc file).
+
+current site is still https://raw.githubusercontent.com/aahrens1/ddml/master/
+{txt}{search r(601), local:r(601);}
+
+{com}. net install pystacked, from(https://raw.githubusercontent.com/aahrens1/pystacked/v0.4.7) replace
+checking {hilite:pystacked} consistency and verifying not already installed...
+
+the following files will be replaced:
+    {hilite:/Users/pranjal/Library/Application Support/Stata/ado/plus/p/pystacked.ado}
+    {hilite:/Users/pranjal/Library/Application Support/Stata/ado/plus/_/_pyparse.ado}
+    {hilite:/Users/pranjal/Library/Application Support/Stata/ado/plus/p/pystacked_p.ado}
+    {hilite:/Users/pranjal/Library/Application Support/Stata/ado/plus/p/pystacked.sthlp}
+
+installing into /Users/pranjal/Library/Application Support/Stata/ado/plus/...
+installation complete.
+
+.  qddml $Y $D ($X), kfolds(2) model(partial) cmd(pystacked) cmdopt(type(reg) method(rf))
+{res}{err}  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(486 lines skipped)
+  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(486 lines skipped)
+{com}(error occurred while loading pystacked.ado)
+{txt}{search r(7102), local:r(7102);}
+
+{com}. net install pystacked, from(https://raw.githubusercontent.com/aahrens1/pystacked/v0.4.5) replace
+checking {hilite:pystacked} consistency and verifying not already installed...
+
+the following files will be replaced:
+    {hilite:/Users/pranjal/Library/Application Support/Stata/ado/plus/p/pystacked.ado}
+    {hilite:/Users/pranjal/Library/Application Support/Stata/ado/plus/_/_pyparse.ado}
+    {hilite:/Users/pranjal/Library/Application Support/Stata/ado/plus/p/pystacked_p.ado}
+    {hilite:/Users/pranjal/Library/Application Support/Stata/ado/plus/p/pystacked.sthlp}
+
+installing into /Users/pranjal/Library/Application Support/Stata/ado/plus/...
+installation complete.
+
+.  qddml $Y $D ($X), kfolds(2) model(partial) cmd(pystacked) cmdopt(type(reg) method(rf))
+{res}{err}  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(476 lines skipped)
+  File "<stdin>", line 1
+    # Import required Python modules
+SyntaxError: invalid syntax
+(476 lines skipped)
+{com}(error occurred while loading pystacked.ado)
+{txt}{search r(7102), local:r(7102);}
+
+{com}. use jtrain2
+{err}no; dataset in memory has changed since last saved
+{txt}{search r(4), local:r(4);}
+
+{com}. clear
+
+. use jtrain2
+
+. reg re78 train re74 re75 age agesq nodegree married black hisp
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(9, 435)       = {res}     2.49
+{txt}       Model {c |} {res} 955.909613         9  106.212179   {txt}Prob > F        ={res}    0.0088
+{txt}    Residual {c |} {res}  18569.747       435  42.6890736   {txt}R-squared       ={res}    0.0490
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0293
+{txt}       Total {c |} {res} 19525.6566       444  43.9767041   {txt}Root MSE        =   {res} 6.5337
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.625166{col 26}{space 2} .6399454{col 37}{space 1}    2.54{col 46}{space 3}0.011{col 54}{space 4} .3673964{col 67}{space 3} 2.882935
+{txt}{space 8}re74 {c |}{col 14}{res}{space 2} .0730643{col 26}{space 2} .0775264{col 37}{space 1}    0.94{col 46}{space 3}0.346{col 54}{space 4}-.0793087{col 67}{space 3} .2254373
+{txt}{space 8}re75 {c |}{col 14}{res}{space 2} .0651047{col 26}{space 2} .1357642{col 37}{space 1}    0.48{col 46}{space 3}0.632{col 54}{space 4}-.2017307{col 67}{space 3} .3319401
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2006381{col 26}{space 2}  .272712{col 37}{space 1}    0.74{col 46}{space 3}0.462{col 54}{space 4}-.3353589{col 67}{space 3} .7366352
+{txt}{space 7}agesq {c |}{col 14}{res}{space 2}-.0025326{col 26}{space 2} .0044565{col 37}{space 1}   -0.57{col 46}{space 3}0.570{col 54}{space 4}-.0112916{col 67}{space 3} .0062264
+{txt}{space 4}nodegree {c |}{col 14}{res}{space 2}-1.099426{col 26}{space 2} .7914955{col 37}{space 1}   -1.39{col 46}{space 3}0.166{col 54}{space 4}-2.655057{col 67}{space 3} .4562048
+{txt}{space 5}married {c |}{col 14}{res}{space 2}-.1052808{col 26}{space 2} .8930025{col 37}{space 1}   -0.12{col 46}{space 3}0.906{col 54}{space 4}-1.860417{col 67}{space 3} 1.649855
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-2.115677{col 26}{space 2} 1.172482{col 37}{space 1}   -1.80{col 46}{space 3}0.072{col 54}{space 4} -4.42011{col 67}{space 3} .1887571
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2}-.0095228{col 26}{space 2} 1.551503{col 37}{space 1}   -0.01{col 46}{space 3}0.995{col 54}{space 4}-3.058898{col 67}{space 3} 3.039852
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3.691303{col 26}{space 2} 4.180235{col 37}{space 1}    0.88{col 46}{space 3}0.378{col 54}{space 4}-4.524666{col 67}{space 3} 11.90727
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg re78 train age educ black hisp married re74 re75
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(8, 436)       = {res}     3.16
+{txt}       Model {c |} {res} 1070.38094         8  133.797618   {txt}Prob > F        ={res}    0.0017
+{txt}    Residual {c |} {res} 18455.2757       436   42.328614   {txt}R-squared       ={res}    0.0548
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0375
+{txt}       Total {c |} {res} 19525.6566       444  43.9767041   {txt}Root MSE        =   {res}  6.506
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.682588{col 26}{space 2} .6317662{col 37}{space 1}    2.66{col 46}{space 3}0.008{col 54}{space 4} .4409018{col 67}{space 3} 2.924273
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0557707{col 26}{space 2} .0447708{col 37}{space 1}    1.25{col 46}{space 3}0.214{col 54}{space 4}-.0322227{col 67}{space 3} .1437641
+{txt}{space 8}educ {c |}{col 14}{res}{space 2} .4058834{col 26}{space 2} .1756312{col 37}{space 1}    2.31{col 46}{space 3}0.021{col 54}{space 4} .0606944{col 67}{space 3} .7510724
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-2.169781{col 26}{space 2} 1.158587{col 37}{space 1}   -1.87{col 46}{space 3}0.062{col 54}{space 4}-4.446892{col 67}{space 3} .1073296
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2} .1579258{col 26}{space 2} 1.545261{col 37}{space 1}    0.10{col 46}{space 3}0.919{col 54}{space 4}-2.879161{col 67}{space 3} 3.195012
+{txt}{space 5}married {c |}{col 14}{res}{space 2}-.1402712{col 26}{space 2} .8784491{col 37}{space 1}   -0.16{col 46}{space 3}0.873{col 54}{space 4}-1.866792{col 67}{space 3}  1.58625
+{txt}{space 8}re74 {c |}{col 14}{res}{space 2} .0828563{col 26}{space 2} .0766648{col 37}{space 1}    1.08{col 46}{space 3}0.280{col 54}{space 4}-.0678221{col 67}{space 3} .2335347
+{txt}{space 8}re75 {c |}{col 14}{res}{space 2} .0515333{col 26}{space 2} .1341895{col 37}{space 1}    0.38{col 46}{space 3}0.701{col 54}{space 4}-.2122054{col 67}{space 3}  .315272
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .6217388{col 26}{space 2} 2.447473{col 37}{space 1}    0.25{col 46}{space 3}0.800{col 54}{space 4}-4.188572{col 67}{space 3}  5.43205
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. use jtrain3, clear
+
+. reg re78 train
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     2,675
+{txt}{hline 13}{c +}{hline 34}   F(1, 2673)      = {res}   173.41
+{txt}       Model {c |} {res} 39811.3898         1  39811.3898   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 613649.173     2,673  229.573204   {txt}R-squared       ={res}    0.0609
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0606
+{txt}       Total {c |} {res} 653460.563     2,674  244.375678   {txt}Root MSE        =   {res} 15.152
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2}-15.20478{col 26}{space 2} 1.154614{col 37}{space 1}  -13.17{col 46}{space 3}0.000{col 54}{space 4} -17.4688{col 67}{space 3}-12.94075
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 21.55392{col 26}{space 2} .3036414{col 37}{space 1}   70.98{col 46}{space 3}0.000{col 54}{space 4} 20.95853{col 67}{space 3} 22.14932
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg re78 train re74 re75 age agesq nodegree married black hisp
+{err}variable {bf}nodegree{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. reg re78 train re74 re75 age agesq married black hisp
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     2,675
+{txt}{hline 13}{c +}{hline 34}   F(8, 2666)      = {res}   458.72
+{txt}       Model {c |} {res}  378495.11         8  47311.8888   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 274965.453     2,666  103.137829   {txt}R-squared       ={res}    0.5792
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.5780
+{txt}       Total {c |} {res} 653460.563     2,674  244.375678   {txt}Root MSE        =   {res} 10.156
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} .7832383{col 26}{space 2} .9155777{col 37}{space 1}    0.86{col 46}{space 3}0.392{col 54}{space 4}-1.012076{col 67}{space 3} 2.578553
+{txt}{space 8}re74 {c |}{col 14}{res}{space 2} .2945829{col 26}{space 2} .0280557{col 37}{space 1}   10.50{col 46}{space 3}0.000{col 54}{space 4} .2395696{col 67}{space 3} .3495961
+{txt}{space 8}re75 {c |}{col 14}{res}{space 2} .5877416{col 26}{space 2}  .027637{col 37}{space 1}   21.27{col 46}{space 3}0.000{col 54}{space 4} .5335495{col 67}{space 3} .6419338
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .1791677{col 26}{space 2}   .15796{col 37}{space 1}    1.13{col 46}{space 3}0.257{col 54}{space 4}-.1305689{col 67}{space 3} .4889042
+{txt}{space 7}agesq {c |}{col 14}{res}{space 2}-.0041728{col 26}{space 2} .0021398{col 37}{space 1}   -1.95{col 46}{space 3}0.051{col 54}{space 4}-.0083687{col 67}{space 3} .0000231
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .8676401{col 26}{space 2} .5946132{col 37}{space 1}    1.46{col 46}{space 3}0.145{col 54}{space 4}-.2983097{col 67}{space 3}  2.03359
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-1.578399{col 26}{space 2} .4765813{col 37}{space 1}   -3.31{col 46}{space 3}0.001{col 54}{space 4}-2.512905{col 67}{space 3}-.6438923
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2} 1.268689{col 26}{space 2} 1.093301{col 37}{space 1}    1.16{col 46}{space 3}0.246{col 54}{space 4}-.8751158{col 67}{space 3} 3.412493
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3.507648{col 26}{space 2} 2.650376{col 37}{space 1}    1.32{col 46}{space 3}0.186{col 54}{space 4}-1.689354{col 67}{space 3}  8.70465
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. probit train re74 re75 age agesq married black hisp, nolog
+{res}
+{txt}Probit regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:2,675}
+{txt}{col 57}{lalign 13:LR chi2({res:7})}{col 70} = {res}{ralign 6:866.10}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+{txt}Log likelihood = {res:-239.59964}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.6438}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       train{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}re74 {c |}{col 14}{res}{space 2}-.0596168{col 26}{space 2}  .013794{col 37}{space 1}   -4.32{col 46}{space 3}0.000{col 54}{space 4}-.0866525{col 67}{space 3} -.032581
+{txt}{space 8}re75 {c |}{col 14}{res}{space 2}-.1170554{col 26}{space 2} .0173302{col 37}{space 1}   -6.75{col 46}{space 3}0.000{col 54}{space 4}-.1510219{col 67}{space 3}-.0830889
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .1424478{col 26}{space 2} .0565073{col 37}{space 1}    2.52{col 46}{space 3}0.012{col 54}{space 4} .0316954{col 67}{space 3} .2532002
+{txt}{space 7}agesq {c |}{col 14}{res}{space 2}-.0027529{col 26}{space 2} .0008563{col 37}{space 1}   -3.21{col 46}{space 3}0.001{col 54}{space 4}-.0044312{col 67}{space 3}-.0010746
+{txt}{space 5}married {c |}{col 14}{res}{space 2}-.9530633{col 26}{space 2} .1414955{col 37}{space 1}   -6.74{col 46}{space 3}0.000{col 54}{space 4}-1.230389{col 67}{space 3}-.6757373
+{txt}{space 7}black {c |}{col 14}{res}{space 2} 1.375466{col 26}{space 2} .1588651{col 37}{space 1}    8.66{col 46}{space 3}0.000{col 54}{space 4} 1.064096{col 67}{space 3} 1.686836
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2} 1.334679{col 26}{space 2} .2987251{col 37}{space 1}    4.47{col 46}{space 3}0.000{col 54}{space 4} .7491889{col 67}{space 3}  1.92017
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-2.175195{col 26}{space 2} .8690109{col 37}{space 1}   -2.50{col 46}{space 3}0.012{col 54}{space 4}-3.878425{col 67}{space 3}-.4719654
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: 679 failures and 0 successes completely determined.{p_end}
+
+{com}. predict propensity, p
+
+. reg re78 train propensity
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     2,675
+{txt}{hline 13}{c +}{hline 34}   F(2, 2672)      = {res}   158.26
+{txt}       Model {c |} {res}   69211.07         2   34605.535   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 584249.493     2,672  218.656247   {txt}R-squared       ={res}    0.1059
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1052
+{txt}       Total {c |} {res} 653460.563     2,674  244.375678   {txt}Root MSE        =   {res} 14.787
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.114043{col 26}{space 2}  1.80287{col 37}{space 1}    0.62{col 46}{space 3}0.537{col 54}{space 4}-2.421118{col 67}{space 3} 4.649204
+{txt}{space 2}propensity {c |}{col 14}{res}{space 2}-27.78182{col 26}{space 2} 2.395909{col 37}{space 1}  -11.60{col 46}{space 3}0.000{col 54}{space 4}-32.47984{col 67}{space 3}-23.08379
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 22.36044{col 26}{space 2} .3043872{col 37}{space 1}   73.46{col 46}{space 3}0.000{col 54}{space 4} 21.76358{col 67}{space 3}  22.9573
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg re78 train re74 re75 age agesq nodegree married black hisp
+{err}variable {bf}nodegree{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. sum propensity
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 2}propensity {c |}{res}      2,675    .0696538    .1909576          0   .8515167
+
+{com}. gen wp = train*(propensity-r(mean))
+
+. reg re78 train propensity wp /*adding the interaction term*/
+{err}variable {bf}*adding{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. reg re78 train propensity wp 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     2,675
+{txt}{hline 13}{c +}{hline 34}   F(3, 2671)      = {res}   125.37
+{txt}       Model {c |} {res} 80655.5674         3  26885.1891   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 572804.996     2,671  214.453387   {txt}R-squared       ={res}    0.1234
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1224
+{txt}       Total {c |} {res} 653460.563     2,674  244.375678   {txt}Root MSE        =   {res} 14.644
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2}   -12.39{col 26}{space 2} 2.570022{col 37}{space 1}   -4.82{col 46}{space 3}0.000{col 54}{space 4}-17.42944{col 67}{space 3}-7.350569
+{txt}{space 2}propensity {c |}{col 14}{res}{space 2}-39.53159{col 26}{space 2} 2.866537{col 37}{space 1}  -13.79{col 46}{space 3}0.000{col 54}{space 4}-45.15245{col 67}{space 3}-33.91074
+{txt}{space 10}wp {c |}{col 14}{res}{space 2} 37.32066{col 26}{space 2} 5.108783{col 37}{space 1}    7.31{col 46}{space 3}0.000{col 54}{space 4} 27.30309{col 67}{space 3} 47.33824
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 22.70154{col 26}{space 2} .3050425{col 37}{space 1}   74.42{col 46}{space 3}0.000{col 54}{space 4}  22.1034{col 67}{space 3} 23.29969
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg re78 train propensity 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     2,675
+{txt}{hline 13}{c +}{hline 34}   F(2, 2672)      = {res}   158.26
+{txt}       Model {c |} {res}   69211.07         2   34605.535   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 584249.493     2,672  218.656247   {txt}R-squared       ={res}    0.1059
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1052
+{txt}       Total {c |} {res} 653460.563     2,674  244.375678   {txt}Root MSE        =   {res} 14.787
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        re78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} 1.114043{col 26}{space 2}  1.80287{col 37}{space 1}    0.62{col 46}{space 3}0.537{col 54}{space 4}-2.421118{col 67}{space 3} 4.649204
+{txt}{space 2}propensity {c |}{col 14}{res}{space 2}-27.78182{col 26}{space 2} 2.395909{col 37}{space 1}  -11.60{col 46}{space 3}0.000{col 54}{space 4}-32.47984{col 67}{space 3}-23.08379
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 22.36044{col 26}{space 2} .3043872{col 37}{space 1}   73.46{col 46}{space 3}0.000{col 54}{space 4} 21.76358{col 67}{space 3}  22.9573
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. use https://stats.idre.ucla.edu/stat/stata/examples/methods_matter/chapter4/nyvoucher, clear 
+
+. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/nyvoucher.csv", replace
+{res}{txt}{p 0 4 2}
+(file {bf}
+/Users/pranjal/Desktop/Causal-Inference/data/nyvoucher.csv{rm}
+not found)
+{p_end}
+{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/nyvoucher.csv} saved
+
+{com}. use https://stats.idre.ucla.edu/stat/stata/examples/methods_matter/chapter7/sfa
+
+. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/school.csv", replace
+{res}{txt}{p 0 4 2}
+(file {bf}
+/Users/pranjal/Desktop/Causal-Inference/data/school.csv{rm}
+not found)
+{p_end}
+{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/school.csv} saved
+
+{com}. use https://stats.idre.ucla.edu/stat/stata/examples/methods_matter/chapter8/dynarski, clear
+
+. svyset, clear
+
+. svyset [pw=wt88], psu(hhid)
+
+{txt}Sampling weights:{col 19}{res}wt88
+             {txt}VCE:{col 19}{res}linearized
+     {txt}Single unit:{col 19}{res}missing
+        {txt}Strata 1:{col 19}<one>
+ Sampling unit 1:{col 19}{res}hhid
+           {txt}FPC 1:{col 19}<zero>
+{p2colreset}{...}
+
+{com}. svy: mean coll 
+{res}{txt}(running {bf:mean} on estimation sample)
+{res}
+{txt}Survey: Mean estimation
+
+{col 1}{lalign 16:Number of strata}{col 17} = {res}{ralign 5:1}{txt}{col 32}{lalign 15:Number of obs}{col 47} = {res}{ralign 13:3,986}
+{txt}{col 1}{lalign 16:Number of PSUs}{col 17} = {res}{ralign 5:3,123}{txt}{col 32}{lalign 15:Population size}{col 47} = {res}{ralign 13:1,302,933,368}
+{txt}{col 32}{lalign 15:Design df}{col 47} = {res}{ralign 13:3,122}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 14}{hline 12}
+{col 14}{c |}{col 26}  Linearized
+{col 14}{c |}       Mean{col 26}   std. err.{col 38}     [95% con{col 51}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 14}{hline 12}
+{space 8}coll {c |}{col 14}{res}{space 2} .4943504{col 26}{space 2} .0105154{col 37}{space 5} .4737326{col 51}{space 3} .5149681
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 14}{hline 12}
+
+{com}. tabulate fatherdec yearsr
+
+ {txt}Father deceased by {c |}                 Year in which a senior
+             age 18 {c |}        79         80         81         82         83 {c |}     Total
+{hline 20}{c +}{hline 55}{c +}{hline 10}
+Father not deceased {c |}{res}       892        986        867        828        222 {txt}{c |}{res}     3,795 
+{txt}    Father deceased {c |}{res}        41         44         52         41         13 {txt}{c |}{res}       191 
+{txt}{hline 20}{c +}{hline 55}{c +}{hline 10}
+              Total {c |}{res}       933      1,030        919        869        235 {txt}{c |}{res}     3,986 
+
+{com}. regress coll offer
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     3,986
+{txt}{hline 13}{c +}{hline 34}   F(1, 3984)      = {res}     7.87
+{txt}       Model {c |} {res} 1.95159464         1  1.95159464   {txt}Prob > F        ={res}    0.0050
+{txt}    Residual {c |} {res} 987.467623     3,984  .247858339   {txt}R-squared       ={res}    0.0020
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0017
+{txt}       Total {c |} {res} 989.419217     3,985  .248285876   {txt}Root MSE        =   {res} .49785
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        coll{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}offer {c |}{col 14}{res}{space 2} .0494461{col 26}{space 2} .0176213{col 37}{space 1}    2.81{col 46}{space 3}0.005{col 54}{space 4} .0148984{col 67}{space 3} .0839938
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .4221014{col 26}{space 2} .0149836{col 37}{space 1}   28.17{col 46}{space 3}0.000{col 54}{space 4} .3927251{col 67}{space 3} .4514778
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. use https://stats.idre.ucla.edu/stat/stata/examples/methods_matter/chapter8/dynarski, clear
+
+. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/collegeoffer.csv", replace
+{res}{txt}{p 0 4 2}
+(file {bf}
+/Users/pranjal/Desktop/Causal-Inference/data/collegeoffer.csv{rm}
+not found)
+{p_end}
+{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/collegeoffer.csv} saved
+
+{com}. use https://stats.idre.ucla.edu/stat/stata/examples/methods_matter/chapter12/catholic, clear 
+
+. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/catholic.csv", replace
+{res}{txt}{p 0 4 2}
+(file {bf}
+/Users/pranjal/Desktop/Causal-Inference/data/catholic.csv{rm}
+not found)
+{p_end}
+{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/catholic.csv} saved
+
+{com}. use fertil2, clear
+
+. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/fertil2.csv", replace
+{res}{txt}{p 0 4 2}
+(file {bf}
+/Users/pranjal/Desktop/Causal-Inference/data/fertil2.csv{rm}
+not found)
+{p_end}
+{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/fertil2.csv} saved
+
+{com}. use smoke, clear
+
+. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/smoke.csv", replace
+{res}{txt}{p 0 4 2}
+(file {bf}
+/Users/pranjal/Desktop/Causal-Inference/data/smoke.csv{rm}
+not found)
+{p_end}
+{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/smoke.csv} saved
+
+{com}. webuse cattaneo2.dta, clear
+{txt}(Excerpt from Cattaneo (2010) Journal of Econometrics 155: 138–154)
+
+{com}. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/smoking.csv", replace
+{res}{txt}{p 0 4 2}
+(file {bf}
+/Users/pranjal/Desktop/Causal-Inference/data/smoking.csv{rm}
+not found)
+{p_end}
+{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/smoking.csv} saved
+
+{com}. use mroz, clear
+
+. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/wage.csv", replace
+{res}{txt}{p 0 4 2}
+(file {bf}
+/Users/pranjal/Desktop/Causal-Inference/data/wage.csv{rm}
+not found)
+{p_end}
+{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/wage.csv} saved
+
+{com}. use "/Users/pranjal/Downloads/12097/Econometrics Journal_updated_01_07_18/401K/sipp1991.dta"
+
+. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/401k", replace
+{res}{txt}{p 0 4 2}
+(file {bf}
+/Users/pranjal/Desktop/Causal-Inference/data/401k.csv{rm}
+not found)
+{p_end}
+{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/401k.csv} saved
+
+{com}. export delimited using "/Users/pranjal/Desktop/Causal-Inference/data/401k.csv", replace
+{res}{txt}file {bf:/Users/pranjal/Desktop/Causal-Inference/data/401k.csv} saved
+
+{com}. 
