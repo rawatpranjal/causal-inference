@@ -1,8 +1,9 @@
-# Causal-Inference
+# Causal Machine Learning
 
-Causal Inference with Potential Outcomes Framework and Graphical Methods:
-- Examples from Double Machine Learning (DML) from Chernozhukhov (2016)
+Causal Inference through Machine Learning Methods:
+- Deep Learning for Individual Heterogenity and Inference from Farrell et al., (2021)
+    - Linear, logit Models under unconfoundedness
+- Double Machine Learning (DML) from Chernozhukhov et al., (2016)
     - Estimation under unconfoundedness
     - Estimation with instruments
 - Directed Acyclical Graphs (DAGs) and Probabilitic Graphical Models (PGMs)
-- Survival Models (Cox Proportional Hazards, etc.)
