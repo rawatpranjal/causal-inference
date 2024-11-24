@@ -1,9 +1,15 @@
 # Observational Causal Inference
 
-- Matching Methods - PSM, IPW
-- Diff in diff and Synthetic Controls
-- Double Machine Learning (DML) from Chernozhukhov et al., (2016)
-- Deep Learning for Individual Heterogenity and Inference from Farrell et al., (2021)
-    - Linear, logit Models under unconfoundedness
-    - Code adapted from https://github.com/MisraLab/cml.github.io
-- Directed Acyclical Graphs (DAGs) and Probabilitic Graphical Models (PGMs)
+README.md: Instructions and usage guide.
+dag/: Directed Acyclical Graphs (DAGs) and Probabilitic Graphical Models (PGMs)
+data/: Datasets for examples and tutorials.
+dl/: Deep Learning for Individual Heterogeneity (https://github.com/MisraLab/cml.github.io)
+dml/: Double Machine Learning examples.
+debiasing.ipynb: Debiasing estimators.
+did.ipynb: Difference-in-Differences examples.
+event.ipynb: Event study designs.
+matching.ipynb: Matching estimators (e.g., PSM).
+mle.ipynb: Maximum Likelihood Estimation methods.
+panel.ipynb: Panel data estimators.
+survival.ipynb: Survival analysis for time-to-event data.
+tmle.ipynb: Targeted Maximum Likelihood Estimation.
